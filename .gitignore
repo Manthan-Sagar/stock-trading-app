@@ -1,0 +1,174 @@
+# =============================================================================
+# ENVIRONMENT & SECRETS (Never commit sensitive data)
+# =============================================================================
+.env
+.env.*
+!.env.example
+!.env.template
+*.pem
+*.key
+*.pkcs12
+*.pfx
+*.p12
+*.cer
+*.crt
+*.jks
+credentials.json
+service-account*.json
+secrets/
+credentials/
+*.secret
+application-local.properties
+application-local.yml
+application-local.yaml
+application-secret.*
+
+# =============================================================================
+# JAVA / SPRING BOOT / MAVEN / GRADLE
+# =============================================================================
+**/target/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*
+replay_pid*
+HELP.md
+
+# Maven Wrapper JAR
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Gradle
+.gradle/
+**/build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# =============================================================================
+# PYTHON (ai-service)
+# =============================================================================
+**/__pycache__/
+*.py[cod]
+*$py.class
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+.env/
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+htmlcov/
+.hypothesis/
+
+# Jupyter / Notebooks
+.ipynb_checkpoints
+
+# =============================================================================
+# NODE.JS / WEB (UI or future Node services)
+# =============================================================================
+**/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-debug.log*
+.next/
+.out/
+
+# =============================================================================
+# IDEs & EDITORS
+# =============================================================================
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Eclipse / Spring Tool Suite (STS)
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache
+
+# NetBeans
+**/nbproject/private/
+**/nbbuild/
+**/nbdist/
+**/.nb-gradle/
+
+# =============================================================================
+# LOGS & TEMPORARY FILES
+# =============================================================================
+*.log
+logs/
+**/logs/
+*.pid
+*.seed
+*.pid.lock
+*.tmp
+*.temp
+*~
+
+# =============================================================================
+# DATABASE & LOCAL STORAGE
+# =============================================================================
+*.sqlite
+*.sqlite3
+*.db
+mysql-data/
+redis-data/
+kafka-data/
+
+# =============================================================================
+# OPERATING SYSTEM
+# =============================================================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+[Dd]esktop.ini
