@@ -145,6 +145,64 @@ public class UserService {
         return response;
     }
 
+    /**
+     * add funds to wallet - called on sell order failure or just topup
+     * @param userId
+     * @param amount
+     * @return
+     */
+    public UserResponse addFunds(String userId, BigDecimal amount){
+        log.info("Adding funds to user: {} with amount {}",userId,amount);
+        User user = userRepository.findById(userId)
+            .orElseThrow(() -> new RuntimeException("User not found" + userId));
+        user.setWalletBalance(user.getWalletBalance().add(amount));
+        User savedUser = userRepository.save(user);
+
+        log.info("Funds added successfully for user: {}", savedUser.getId());
+
+        return mapToResponse(user);
+    }
+
+    /**
+     * deduct funds from wallet - called on buy order
+     * @param userId
+     * @param amount
+     * @return
+     */
+    public UserResponse deductFunds(String userId, BigDecimal amount) {
+        log.info("Deducting funds from user: {} with amount {}",userId,amount);
+        User user = userRepository.findById(userId)
+            .orElseThrow(() -> new RuntimeException("User not found" + userId));
+        if(user.getWalletBalance().compareTo(amount)<0)
+            throw new RuntimeException("Insufficient funds for user: " + userId);
+
+        user.setWalletBalance(user.getWalletBalance().subtract(amount));
+        User savedUser = userRepository.save(user);
+
+        log.info("Funds deducted successfully for user: {}", savedUser.getId());
+
+        return mapToResponse(user);
+    }
+
+    /**
+     * credit funds to wallet - called on sell order
+     * @param userId
+     * @param amount
+     * @return
+     */
+
+    public UserResponse creditFunds(String userId, BigDecimal amount) {
+        log.info("Crediting funds to user: {} with amount {}",userId,amount);
+        User user = userRepository.findById(userId)
+            .orElseThrow(() -> new RuntimeException("User not found" + userId));
+        user.setWalletBalance(user.getWalletBalance().add(amount));
+        User savedUser = userRepository.save(user);
+
+        log.info("Funds credited successfully for user: {}", savedUser.getId());
+
+        return mapToResponse(user);
+    }
+
 
 
 
