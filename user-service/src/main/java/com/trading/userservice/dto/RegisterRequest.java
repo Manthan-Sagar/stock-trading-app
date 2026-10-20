@@ -27,7 +27,7 @@ public class RegisterRequest {
     
     private String lastName;
     
-    private BigDecimal walletBalance;
+    private BigDecimal initialDeposit;
     
     
 }

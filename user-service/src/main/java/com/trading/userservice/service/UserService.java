@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.trading.userservice.dto.AuthResponse;
@@ -14,14 +15,16 @@ import com.trading.userservice.dto.UserResponse;
 import com.trading.userservice.entity.User;
 import com.trading.userservice.repository.UserRepository;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service 
 @Slf4j 
+@RequiredArgsConstructor
 public class UserService {
     
     private final UserRepository userRepository;
-    private final PasswordEncoder PasswordEncoder;
+    private final PasswordEncoder passwordEncoder;
     private final KafkaTemplate<String,Object> kafkaTemplate;
 
     private static final String USER_REGISTERED_TOPIC = "user-registered";
@@ -42,11 +45,11 @@ public class UserService {
 
         User user = new User();
         user.setEmail(request.getEmail());
-        user.setPassword(PasswordEncoder.encode(request.getPassword()));
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
         user.setWalletBalance(
-            request.getInitialDeposit() != null ? request.getInitialDeposit() : BigDecimal.valueOf(10000);
+            request.getInitialDeposit() != null ? request.getInitialDeposit() : BigDecimal.valueOf(10000)
         );
 
         User savedUser = userRepository.save(user);
@@ -83,7 +86,7 @@ public class UserService {
         User user = userRepository.findByEmail(request.getEmail())
             .orElseThrow(() -> new RuntimeException("User not found"));
 
-        if(!PasswordEncoder.matches(request.getPassword(), user.getPassword())) {
+        if(!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new RuntimeException("Invalid password");
         }
 
