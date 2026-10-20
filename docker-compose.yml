@@ -1,4 +1,6 @@
-version: '3.8'
+
+
+name: stock-trading-app
 
 services:
 
@@ -7,7 +9,7 @@ services:
   # ─────────────────────────────────────────
   mysql:
     image: mysql:8.0
-    container_name: mysql
+    container_name: stock-mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
     ports:
@@ -27,7 +29,7 @@ services:
   # ─────────────────────────────────────────
   redis:
     image: redis:latest
-    container_name: redis
+    container_name: stock-redis
     ports:
       - "6379:6379"
     networks:
@@ -49,7 +51,8 @@ services:
   # ─────────────────────────────────────────
   kafka:
     image: confluentinc/cp-kafka:7.4.0
-    container_name: kafka
+    container_name: stock-kafka
+    hostname: kafka
     ports:
       - "9092:9092"
     environment:
